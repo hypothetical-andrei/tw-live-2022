@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    window.onload = () => {
+      const content = document.getElementById('content')
+      const address = document.getElementById('address')
+      const addBtn = document.getElementById('addBtn')
+      const modifyBtn = document.getElementById('modifyBtn')
+
+      const clearBtn = document.getElementById('clearBtn')
+
+      const linkList = document.getElementById('linkList')
+      
+      addBtn.onclick = () => {
+        const container = document.createElement('div')
+        const link = document.createElement('a')
+        link.textContent = content.value
+        link.href = address.value
+        link.style.color = 'orange'
+        container.appendChild(link)
+        linkList.appendChild(container)
+      }
+
+      clearBtn.onclick = () => {
+        for (const element of linkList.children) {
+          element.parentNode.removeChild(element)
+        }
+      }
+
+      modifyBtn.onclick = () => {
+        const links = document.getElementsByTagName('a')
+        for (const element of links) {
+          element.setAttribute('href', 'https://www.ase.ro')
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div>
+    <input type="text" id="content">
+    <input type="text" id="address">
+  </div>
+  <div>
+    <input type="button" value="add me!" id="addBtn">
+    <input type="button" value="modify all!" id="modifyBtn">
+    <input type="button" value="clear all!" id="clearBtn">
+  </div>
+  <div id="linkList">
+
+  </div>
+</body>
+</html>

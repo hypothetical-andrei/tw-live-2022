@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			function f0(callback){
+				setTimeout(() => callback('result for f0'), 100)
+			}
+			
+			function callback(r){
+				console.log(r)
+				console.log('next')
+			}
+			
+			f0(callback)
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

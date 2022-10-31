@@ -1,0 +1,22 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    window.onload = () => {
+      const somediv = document.getElementById('somediv')
+      console.log(somediv.innerHTML)
+      console.log(somediv instanceof HTMLElement)
+      const paragraphs = document.getElementsByTagName('p')
+      console.log(paragraphs)
+    }
+  </script>
+</head>
+<body>
+  <div id="somediv">
+    <p>this is some div</p>
+  </div>
+</body>
+</html>
