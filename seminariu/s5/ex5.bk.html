@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #login-form {
+      background-color: gainsboro;
+      width: 500px;
+      display: flex;
+      flex-flow: column wrap;
+      padding: 5px;
+      align-items: center;
+      border-radius: 5px;
+    }
+
+    .container {
+      background-color: whitesmoke;
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      align-items:stretch;
+    }
+
+    label {
+      width: 20%;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    input[type=text],input[type=password] {
+      width: 80%;
+      border: 0px;
+      border-radius: 5px;
+      height: 2em;
+    }
+
+    .button-container {
+      background-color: whitesmoke;
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .link-container {
+      background-color: whitesmoke;
+      display: flex;
+      flex-flow: row wrap;
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+    }
+
+    button {
+      background-color: green;
+      color: white;
+      border: 0px;
+      border-radius: 5px;
+      width: 20%;
+      height: 2em;
+      margin: 0px 2px;
+    }
+  </style>
+</head>
+<body>
+  <form id="login-form">
+    <h2>Login form</h2>
+    <div class="container">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" placeholder="Username" required>
+    </div>
+    <div class="container">
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password" placeholder="Password" required>
+    </div>
+    <div class="button-container">
+      <button>Login</button>
+      <button>Cancel</button>
+        <input type="checkbox" name="remember" checked id="remember"> 
+        <label for="remember">
+        Remember me
+      </label>      
+    </div>
+    <div class="link-container">
+      <span>Forgot <a href="#">password</a>?</span>
+    </div>
+  </form>
+</body>
+</html>

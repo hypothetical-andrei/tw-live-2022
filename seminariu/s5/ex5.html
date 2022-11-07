@@ -1,0 +1,78 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    form {
+      border: 5px solid #f1f1f1;
+    }
+    .image-container {
+      text-align: center;
+      margin: 24px 12px 0px;
+    }
+    .container {
+      padding: 16px;
+    }
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin: 8px 0px;
+      padding: 12px 20px;
+    }
+    button {
+      background-color: #04aa6d;
+      color: #fff;
+      padding: 12px 20px;
+      margin: 8px 0px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    .cancel-button {
+      width: auto;
+      padding: 10px 18px;
+      background-color: gold;
+    }
+    button:hover{
+      opacity: 0.8;
+    }
+    .forgot-password {
+      float: right;
+      padding-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login form</h2>
+  <form id="login-form">
+    <div class="image-container">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar">
+    </div>
+    <div class="container">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" placeholder="Username" required>
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password" placeholder="Password" required>
+      <button>Login</button>
+      <label for="remember">
+        <input type="checkbox" name="remember" checked id="remember">Remember me 
+      </label>      
+    </div>
+      <div class="container">
+        <button class="cancel-button">Cancel</button>
+        <span class="forgot-password">Forgot <a href="#">password</a>?</span>
+      </div>
+  </form>
+</body>
+</html>

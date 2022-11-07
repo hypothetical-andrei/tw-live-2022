@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ex0</title>
+  <style>
+    * {
+      background-color: #444;
+      color: #fff;
+    }
+    #container {
+      border: 1px dashed #ccc;
+    }
+    div {
+      padding: 10px;
+      color: #111;
+    }
+    #container div:first-child {
+      background-color: #222;
+      color: #eee;
+    }
+    #container div:first-child:before {
+      content: "2021 - "
+    }
+    #container div:last-child {
+      background-color: #999;
+      text-align: right;
+    }
+    #container .main {
+      width: 100%;
+      height: 500px;
+      background-color: #fff;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+    #container .main * {
+      margin: 0px;
+      padding: 5px;
+      background-color: #eee;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div>Title</div>
+    <div class="main">
+      <p>a</p>
+      <p>b</p>
+      <p>c</p>
+    </div>
+    <div>
+      Footer
+    </div>
+  </div>
+</body>
+</html>
