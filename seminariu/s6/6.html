@@ -1,0 +1,202 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>thatsapp</title>
+  <style>
+    :root {
+      --base-background-color: white;
+      --secondary-background-color: whitesmoke;
+      --base-text-color: black;
+      --secondary-text-color:gray;
+      --badge-color: lime;
+    }
+
+    body {
+      margin: 0px;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 30% auto;
+      grid-template-rows: 10% auto 10%;
+      grid-template-areas: 
+        "search-bar chat-heading"
+        "contacts chat"
+        "contacts chat-input"
+        ;
+      height: 100vh;
+    }
+
+    div.chat-heading {
+      grid-area: chat-heading;
+      background-color: var(--secondary-background-color);
+      height: 100%;
+      width: 100%;
+    }
+
+    div.search-bar {
+      grid-area: seach-bar;
+      background-color: var(--secondary-background-color);
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    div.chat {
+      grid-area: chat;
+      height: 100%;
+      width: 100%;
+    }
+
+    div.contacts {
+      grid-area: contacts;
+      height: 100%;
+      width: 100%;
+    }
+
+    div.chat-input {
+      grid-area: chat-input;
+      background-color: var(--secondary-background-color);
+      height: 100%;
+      width: 100%;
+    }
+
+    .contact {
+      height: 10vh;
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      padding-left: 10px;
+    }
+
+    .contact:nth-child(even) {
+      background-color: var(--secondary-background-color);
+    }
+
+    div.search-bar input {
+      height: 2em;
+      width: 90%;
+      border: 0px;
+      border-radius: 0.9em;
+    }
+
+    .avatar {
+      height: 5vh;
+      width: 5vh;
+      border-radius: 50%;
+      background-color: var(--badge-color);
+      color: var(--base-background-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-container {
+      padding-left: 10px;
+    }
+
+    .contact-container .status {
+      font-size: 0.8em;
+      color: var(--secondary-text-color);
+    }
+
+    .chat .message {
+      width: 75%;
+      min-height: 10vh;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+      margin: 10px;
+    }
+
+    .chat .message .time {
+      color: var(--secondary-text-color);
+    }
+
+    .chat .message .time::before {
+      content: '@';
+    }
+
+    .chat .message:nth-child(odd) {
+      background-color: var(--secondary-background-color);
+      float:left;
+      clear:right;
+    }
+
+    .chat .message:nth-child(even) {
+      background-color: var(--badge-color); 
+      float: right;
+      clear: left;
+      text-align: right;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <div class="search-bar">
+        <input type="text" placeholder="Search or start chat" id="search">
+      </div>
+      <div class="contacts">
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jim</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">Jane</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">J</div>
+          <div class="contact-container">
+            <div class="name">John</div>
+            <div class="status">Here</div>  
+          </div>
+        </div>
+        <div class="contact">
+          <div class="avatar">B</div>
+          <div class="contact-container">
+            <div class="name">Batman</div>
+            <div class="status">Here</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="chat-heading">
+      <div class="avatar">J</div>
+      <div class="interlocutor">Jim</div>
+    </div>
+    <div class="chat">
+      <div class="message">
+        <div class="content">Message from me</div>
+        <div class="time">10-10-10</div>
+      </div>
+      <div class="message">
+        <div class="content">Message from Jim</div>
+        <div class="time">10-10-10</div>
+      </div>
+      <div class="message">
+        <div class="content">Message from me</div>
+        <div class="time">10-10-10</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="input message here">
+      <input type="button" value=">">
+    </div>
+  </div>
+</body>
+</html>
