@@ -4,10 +4,10 @@ const session = require('express-session')
 const app = express()
 app.set('view engine', 'pug')
 
-// app.use((req, res, next) => {
-// 	console.log('here')
-// 	next()
-// })
+app.use((req, res, next) => {
+	console.log('here')
+	next()
+})
 
 app.use(session({secret : 'really secret secret'}))
 
