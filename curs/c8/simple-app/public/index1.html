@@ -1,0 +1,219 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+
+  let SERVER = `${window.location.protocol}//${window.location.hostname}:${window.location.port}`
+
+  class DataStore {
+    constructor (seed) {
+      this.content = seed || []
+    }
+
+    async getItems () {
+      const response = await fetch(`${SERVER}/books`)
+      if (!response.ok) {
+        throw response
+      }
+      const data = await response.json()
+      this.content = data
+    }
+
+    async addItem (item) {
+      const response = await fetch(`${SERVER}/books`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+      })
+      if (!response.ok) {
+        throw response
+      } else {
+        await this.getItems()
+      }
+    }
+
+    async updateItem (id, item) {
+      const response = await fetch(`${SERVER}/books/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+      })
+      if (!response.ok) {
+        throw response
+      } else {
+        await this.getItems()
+      }
+    }
+    
+    async deleteItem (id) {
+      const response = await fetch(`${SERVER}/books/${id}`, {
+        method: 'DELETE'
+      })
+      if (!response.ok) {
+        throw response
+      } else {
+        await this.getItems()
+      }
+    }
+  }
+
+  const store = new DataStore([{id: 1}])
+
+  class DataRowViewer extends HTMLElement {}
+
+  class AddForm extends HTMLElement {
+    constructor () {
+      super()
+
+      this.attachShadow({ mode: 'open' })
+      this.wrapper = document.createElement('div')
+      this.wrapper.setAttribute('class', 'add-form')
+      const style = document.createElement('style')
+      style.textContent = `
+        .add-form {
+          color: lightgreen;
+        }
+      `
+
+      this.content = this.wrapper.appendChild(document.createElement('div'))
+      this.content.innerHTML = `
+        <div>
+          <input type="text" id="title" />
+          <input type="text" id="content" />
+          <input type="button" value="+" id="btn"/>
+        </div>
+      `
+      this.shadowRoot.append(style, this.wrapper) 
+
+    }
+
+    connectedCallback () {
+      const title = this.shadowRoot.getElementById('title')
+      const content = this.shadowRoot.getElementById('content')
+      const btn = this.shadowRoot.getElementById('btn')
+      btn.onclick = async () => {
+        const evt = new Event('add', { composed: true, bubbles: true })
+        evt.payload = {
+          title: title.value,
+          content: content.value
+        }
+        this.dispatchEvent(evt)
+      }
+    }
+  }
+
+  customElements.define('data-row-viewer', DataRowViewer)
+
+  class DataRow extends HTMLElement {
+    constructor () {
+      super()
+
+      this.attachShadow({ mode: 'open' })
+      this.wrapper = document.createElement('div')
+      this.wrapper.setAttribute('class', 'data-row')
+      const style = document.createElement('style')
+      style.textContent = `
+        .data-row {
+          color: lightgreen;
+        }
+      `
+
+      this.shadowRoot.append(style, this.wrapper) 
+    }
+
+    connectedCallback () {
+      this.data = JSON.parse(this.getAttribute('data-content'))
+      if (this.data) {
+        Object.keys(this.data).forEach(e => {
+          const cell = this.wrapper.appendChild(document.createElement('span'))
+          cell.textContent = this.data[e]
+        })
+      }
+    }
+
+    static get observedAttributes() {
+      return ['data-content']
+    }
+
+    attributeChangedCallback (name, oldValue, newValue) {
+      this.data = JSON.parse(newValue)
+      Object.keys(this.data).forEach(e => {
+        const cell = this.wrapper.appendChild(document.createElement('span'))
+        cell.textContent = this.data[e]
+      })
+    }
+  }
+
+  customElements.define('data-row', DataRow)
+
+  class DataTable extends HTMLElement {
+    constructor () {
+      super()
+
+      this.attachShadow({ mode: 'open' })
+      this.wrapper = document.createElement('div')
+      this.wrapper.setAttribute('class', 'data-table')
+      const style = document.createElement('style')
+      style.textContent = `
+        .data-table {
+          color: lightblue;
+        }
+      `
+      this.shadowRoot.append(style, this.wrapper) 
+    
+    }
+
+    connectedCallback () {
+      this.data = JSON.parse(this.getAttribute('data-content'))
+      this.data.forEach(e => {
+        const row = this.wrapper.appendChild(document.createElement('data-row'))
+      })
+      this.content = this.wrapper.appendChild(document.createElement('add-form'))
+    }
+
+      static get observedAttributes() {
+        return ['data-content']
+      }
+
+      attributeChangedCallback (name, oldValue, newValue) {
+        this.data = JSON.parse(newValue)
+        this.wrapper.innerHTML = ''
+        this.data.forEach(e => {
+          const row = this.wrapper.appendChild(document.createElement('data-row'))
+          row.setAttribute('data-content', JSON.stringify(e))
+        })
+        this.content = this.wrapper.appendChild(document.createElement('add-form'))
+
+      }
+    }
+
+    customElements.define('data-table', DataTable)
+
+    document.addEventListener('DOMContentLoaded',  async () => {
+      const dataTable = document.getElementById('t0')
+      try {
+        await store.getItems()
+        dataTable.setAttribute('data-content', JSON.stringify(store.content))
+
+        document.addEventListener('add', async (evt) => {
+          await store.addItem(evt.payload)
+          dataTable.setAttribute('data-content', JSON.stringify(store.content))
+        })
+      } catch (error) {
+        console.warn(error)
+      }
+    })
+
+  </script>
+</head>
+<body>
+  <data-table id="t0" data-content="[]"></data-table>
+</body>
+</html>

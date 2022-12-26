@@ -1,0 +1,29 @@
+.power-user {
+  height: 200px;
+  width: 200px;
+  background-color: tomato;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding: 10px;
+}
+
+.power-user .username {
+  height: 80px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightskyblue;
+}
+
+.power-user .fullName {
+  height: 80px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightsteelblue;
+}

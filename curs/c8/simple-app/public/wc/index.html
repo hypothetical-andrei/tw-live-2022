@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="module" src="./js/data-table.mjs"></script>
+  <script type="module" src="./js/data-row.mjs"></script>
+  <script type="module" src="./js/add-form.mjs"></script>
+  <script type="module">
+    import DataStore from './js/data-store.mjs'
+
+    const store = new DataStore()
+
+    document.addEventListener('DOMContentLoaded',  async () => {
+      const dataTable = document.getElementById('t0')
+      try {
+        await store.getItems()
+        dataTable.setAttribute('data-content', JSON.stringify(store.content))
+
+        dataTable.addEventListener('add', async (evt) => {
+          await store.addItem(evt.payload)
+          dataTable.setAttribute('data-content', JSON.stringify(store.content))
+        })
+        
+        dataTable.addEventListener('update', async (evt) => {
+          await store.updateItem(evt.id, evt.payload)
+          dataTable.setAttribute('data-content', JSON.stringify(store.content))
+        })
+        
+        dataTable.addEventListener('delete', async (evt) => {
+          await store.deleteItem(evt.id)
+          dataTable.setAttribute('data-content', JSON.stringify(store.content))
+        })
+        
+      } catch (error) {
+        console.warn(error)
+      }
+    })
+
+  </script>
+</head>
+<body>
+  <data-table id="t0" data-content="[]" columns='["title", "content"]'></data-table>
+</body>
+</html>
